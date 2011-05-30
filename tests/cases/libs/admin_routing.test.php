@@ -31,6 +31,18 @@ class AdminRoutingTestCase extends CakeTestCase {
         $this->assertIdentical('edit', $params['action']);
         $this->assertIdentical(array('0' => '1'), $params['pass']);
         $this->assertIdentical(array(), $params['named']);
+
+        $params = $Dispatcher->parseParams('/admin/admin/edit/1');
+        $this->assertIdentical('admin_admin', $params['controller']);
+        $this->assertIdentical('edit', $params['action']);
+        $this->assertIdentical(array('0' => '1'), $params['pass']);
+        $this->assertIdentical(array(), $params['named']);
+
+        $params = $Dispatcher->parseParams('/admin/users/edit/1/page:2');
+        $this->assertIdentical('admin_users', $params['controller']);
+        $this->assertIdentical('edit', $params['action']);
+        $this->assertIdentical(array('0' => '1'), $params['pass']);
+        $this->assertIdentical(array('page' => '2'), $params['named']);
     }
 
     /**
