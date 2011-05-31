@@ -2,7 +2,7 @@
 
 `Controller name prefix' custom route plugin for CakePHP
 
-## Background ## 
+## Background ##
 
 This custom route class prove controller name prefix route.
 
