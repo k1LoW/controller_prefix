@@ -1,8 +1,8 @@
 <?php
 App::import('Core', 'Dispatcher');
-App::import('Lib', 'AdminControllerPrefix.AdminRoute');
+App::import('Lib', 'ControllerPrefix.ControllerPrefixRoute');
 
-class AdminRoutingTestCase extends CakeTestCase {
+class ControllerPrefixRoutingTestCase extends CakeTestCase {
 
     /**
      * testParse
@@ -10,7 +10,7 @@ class AdminRoutingTestCase extends CakeTestCase {
      */
     function testParse(){
         Router::connect('/admin/:controller/:action/*',
-                array('controllerPrefix' => 'admin'), array('routeClass' => 'AdminRoute'));
+                        array('controllerPrefix' => 'admin'), array('routeClass' => 'ControllerPrefixRoute'));
 
         $Dispatcher =& new Dispatcher();
 

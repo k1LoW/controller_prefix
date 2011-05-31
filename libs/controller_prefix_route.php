@@ -1,15 +1,14 @@
 <?php
-class AdminRoute extends CakeRoute {
+class ControllerPrefixRoute extends CakeRoute {
 
     /**
      * parse
-     * description
      *
-     * @param $arg
+     * @param $url
      * @return
      */
     function parse($url){
-        if (preg_match('#^/admin/([^/]+)/?#', $url, $matches)) {
+        if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/]+)/?#', $url, $matches)) {
             $c = 'admin/' . $matches[1];
             if (preg_match('#^/' . $c . '(/?)([^/]*)(/?)([^/]*)#', $url, $matches)) {
                 $action = $matches[2];
@@ -23,27 +22,24 @@ class AdminRoute extends CakeRoute {
         }
         $route = parent::parse($url);
         if (is_array($route)) {
-            if ($route['controllerPrefix'] === 'admin') {
-                $route['controller'] = 'admin_' . $route['controller'];
-            }
+                $route['controller'] = $this->defaults['controllerPrefix'] . '_' . $route['controller'];
         }
         return $route;
     }
 
     /**
      * match
-     * description
      *
-     * @param $arg
+     * @param $url
      * @return
      */
     function match($url){
-        if (preg_match('/^admin_/', $url['controller'])) {
+        if (preg_match('/^' . $this->defaults['controllerPrefix'] . '_/', $url['controller'])) {
             $instance =& Router::getInstance();
             $separator = $instance->named['separator'];
-            $url['controller'] = preg_replace('/^admin_/', '', $url['controller']);
+            $url['controller'] = preg_replace('/^' . $this->defaults['controllerPrefix'] . '_/', '', $url['controller']);
 
-            $u = '/admin/' . $url['controller'];
+            $u = '/' . $this->defaults['controllerPrefix'] . '/' . $url['controller'];
 
             if ($url['action'] !== 'index') {
                  $u .= '/' . $url['action'];
