@@ -2,7 +2,7 @@
 
 `Controller name prefix' custom route plugin for CakePHP
 
-## Background ##
+## Background ##o
 
 This custom route class prove controller name prefix route.
 
@@ -20,7 +20,7 @@ ex. /admin/users/edit => AdminUsersController::edit()
 Add the following code in routes.php
 
     App::import('Lib', 'ControllerPrefix.ControllerPrefixRoute');
-    Router::connect('/admin/:controller/:action/#',
+    Router::connect('/admin/:controller/:action/*',
                     array('controllerPrefix' => 'admin'), array('routeClass' => 'ControllerPrefixRoute'));
 
 ## License ##
