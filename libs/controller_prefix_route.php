@@ -8,15 +8,19 @@ class ControllerPrefixRoute extends CakeRoute {
      * @return
      */
     function parse($url){
-        if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/]+)/?#', $url, $matches)) {
+        if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/:]+)/?(.+)#', $url, $matches)) {
             $c = 'admin/' . $matches[1];
-            if (preg_match('#^/' . $c . '(/?)([^/]*)(/?)([^/]*)#', $url, $matches)) {
-                $action = $matches[2];
+            if (preg_match('#^/' . $c . '(/?)([^/]*)/?(.*)#', $url, $matches)) {
                 if ($matches[1] === '') {
                     $url .= '/';
                 }
                 if ($matches[2] === '') {
                     $url .= 'index';
+                }
+                if (strpos($matches[2], ':')) {
+                    unset($matches[0]);
+                    unset($matches[1]);
+                    $url = '/' . $c . '/index/' . implode('/', $matches);
                 }
             }
         }
