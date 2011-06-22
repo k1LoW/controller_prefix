@@ -43,6 +43,25 @@ class ControllerPrefixRoutingTestCase extends CakeTestCase {
         $this->assertIdentical('edit', $params['action']);
         $this->assertIdentical(array('0' => '1'), $params['pass']);
         $this->assertIdentical(array('page' => '2'), $params['named']);
+
+        $params = $Dispatcher->parseParams('/admin/users');
+        $this->assertIdentical('admin_users', $params['controller']);
+        $this->assertIdentical('index', $params['action']);
+
+        $params = $Dispatcher->parseParams('/admin/users/page:2');
+        $this->assertIdentical('admin_users', $params['controller']);
+        $this->assertIdentical('index', $params['action']);
+        $this->assertIdentical(array('page' => '2'), $params['named']);
+
+        $params = $Dispatcher->parseParams('/admin/users/page:2');
+        $this->assertIdentical('admin_users', $params['controller']);
+        $this->assertIdentical('index', $params['action']);
+        $this->assertIdentical(array('page' => '2'), $params['named']);
+
+        $params = $Dispatcher->parseParams('/admin/users/page:2/sort:3');
+        $this->assertIdentical('admin_users', $params['controller']);
+        $this->assertIdentical('index', $params['action']);
+        $this->assertIdentical(array('page' => '2', 'sort' => '3'), $params['named']);
     }
 
     /**
