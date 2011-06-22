@@ -24,7 +24,7 @@ class ControllerPrefixRoute extends CakeRoute {
                 }
             }
         } else if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/:]+)/?$#', $url, $matches)) {
-            $url = '/admin/accounts/index';
+            $url = '/admin/' . $matches[1] . '/index';
         }
         $route = parent::parse($url);
         if (is_array($route)) {
