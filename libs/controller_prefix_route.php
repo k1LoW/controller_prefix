@@ -8,7 +8,7 @@ class ControllerPrefixRoute extends CakeRoute {
      * @return
      */
     function parse($url){
-        if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/:]+)/?(.+)#', $url, $matches)) {
+        if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/:]+)/(.+)#', $url, $matches)) {
             $c = 'admin/' . $matches[1];
             if (preg_match('#^/' . $c . '(/?)([^/]*)/?(.*)#', $url, $matches)) {
                 if ($matches[1] === '') {
@@ -23,6 +23,8 @@ class ControllerPrefixRoute extends CakeRoute {
                     $url = '/' . $c . '/index/' . implode('/', $matches);
                 }
             }
+        } else if (preg_match('#^/' . $this->defaults['controllerPrefix'] . '/([^/:]+)/?$#', $url, $matches)) {
+            $url = '/admin/accounts/index';
         }
         $route = parent::parse($url);
         if (is_array($route)) {
