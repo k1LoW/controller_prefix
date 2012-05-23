@@ -1,4 +1,5 @@
 <?php
+App::uses('CakeRoute', 'Routing/Route');
 class ControllerPrefixRoute extends CakeRoute {
 
     /**
@@ -41,8 +42,8 @@ class ControllerPrefixRoute extends CakeRoute {
      */
     function match($url){
         if (preg_match('/^' . $this->defaults['controllerPrefix'] . '_/', $url['controller'])) {
-            $instance =& Router::getInstance();
-            $separator = $instance->named['separator'];
+            $namedConfig = Router::namedConfig();
+            $separator = $namedConfig['separator'];
             $url['controller'] = preg_replace('/^' . $this->defaults['controllerPrefix'] . '_/', '', $url['controller']);
 
             $u = '/' . $this->defaults['controllerPrefix'] . '/' . $url['controller'];
