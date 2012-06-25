@@ -2,6 +2,8 @@
 
 `Controller name prefix' custom route plugin for CakePHP
 
+[![Build Status](https://secure.travis-ci.org/k1LoW/controller_prefix.png?branch=master)](http://travis-ci.org/k1LoW/controller_prefix)
+
 ## Background ##
 
 This custom route class prove controller name prefix route.
