@@ -42,29 +42,22 @@ class ControllerPrefixRoute extends CakeRoute {
      */
     function match($url){
         if (preg_match('/^' . $this->defaults['controllerPrefix'] . '_/', $url['controller'])) {
-            $namedConfig = Router::namedConfig();
-            $separator = $namedConfig['separator'];
+
+            // backup defaults
+            $defaultsBackup = $this->defaults;
+
+            // remove controllerPrefix from controller
             $url['controller'] = preg_replace('/^' . $this->defaults['controllerPrefix'] . '_/', '', $url['controller']);
 
-            $u = '/' . $this->defaults['controllerPrefix'] . '/' . $url['controller'];
+            $this->default['prefix'] = $this->defaults['controllerPrefix'];
+            unset($this->defaults['controllerPrefix']);
 
-            if ($url['action'] !== 'index') {
-                 $u .= '/' . $url['action'];
-            }
+            $result = parent::match($url);
 
-            unset($url['controller']);
-            unset($url['action']);
-            unset($url['plugin']);
-            unset($url['prefix']);
+            // restore defaults
+            $this->defaults = $defaultsBackup;
 
-            foreach ($url as $key => $value) {
-                if (is_numeric($key)) {
-                    $u .= '/' . $value;
-                } else {
-                    $u .= '/' . $key . $separator . $value;
-                }
-            }
-            return $u;
+            return $result;
         }
     }
-  }
+}
