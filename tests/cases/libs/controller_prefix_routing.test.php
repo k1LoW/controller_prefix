@@ -10,8 +10,11 @@ class ControllerPrefixRoutingTestCase extends CakeTestCase {
      */
     function testParse(){
         Router::reload();
-        Router::connect('/admin/:controller/:action/*',
-                        array('controllerPrefix' => 'admin'), array('routeClass' => 'ControllerPrefixRoute'));
+        Router::connect(
+            '/admin/:controller/:action/*',
+            array('controllerPrefix' => 'admin'),
+            array('routeClass' => 'ControllerPrefixRoute')
+        );
 
         $Dispatcher =& new Dispatcher();
 
@@ -82,6 +85,11 @@ class ControllerPrefixRoutingTestCase extends CakeTestCase {
     function testParseNotAdmin(){
         Router::reload();
         Router::connect(
+            '/admin/:controller/:action/*',
+            array('controllerPrefix' => 'admin'),
+            array('routeClass' => 'ControllerPrefixRoute')
+        );
+        Router::connect(
             '/not_admin/:controller/:action/*',
             array('controllerPrefix' => 'not_admin'),
             array('routeClass' => 'ControllerPrefixRoute')
@@ -139,8 +147,11 @@ class ControllerPrefixRoutingTestCase extends CakeTestCase {
      * @return
      */
     function testNotAdminMatch(){
-        Router::connect('/admin/:controller/:action/*',
-            array('controllerPrefix' => 'admin'), array('routeClass' => 'ControllerPrefixRoute'));
+        Router::connect(
+            '/admin/:controller/:action/*',
+            array('controllerPrefix' => 'admin'),
+            array('routeClass' => 'ControllerPrefixRoute')
+        );
         $url = Router::url(array('controller' => 'not_admin_users', 'action' => 'edit',2));
         $this->assertIdentical('/not_admin/users/edit/2', $url);
     }
