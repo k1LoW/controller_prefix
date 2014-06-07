@@ -2,13 +2,16 @@ language: php
 
 php:
   - 5.3
+  - 5.4
 
 env:
-  - DB=mysql
+  - DB=mysql CAKEPHP=2.3.10
+  - DB=mysql CAKEPHP=2.4.7
 
 before_script:
+  - composer install --dev
   - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi"
-  - wget https://github.com/cakephp/cakephp/tarball/2.2.5 -O cake.tar.gz
+  - wget https://github.com/cakephp/cakephp/tarball/$CAKEPHP -O cake.tar.gz
   - tar xf cake.tar.gz
   - mv cakephp-cakephp-* ./cakephp
   - chmod -R 777 ./cakephp/app/tmp
@@ -17,6 +20,7 @@ before_script:
     'Plugin' => array('/home/travis/build/k1LoW/'),
     ));
     CakePlugin::loadAll();
+    ini_set('include_path',  '/home/travis/build/k1LoW/controller_prefix/vendor/phpunit/phpunit' . PATH_SEPARATOR . ini_get('include_path'));
     " > cakephp/app/Config/bootstrap.php
   - echo "<?php
     class DATABASE_CONFIG {
