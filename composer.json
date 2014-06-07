@@ -1,0 +1,18 @@
+{
+    "name": "k1low/controller_prefix",
+    "description": "`Controller name prefix' custom route plugin for CakePHP",
+    "type": "cakephp-plugin",
+    "keywords": ["cakephp", "route"],
+    "homepage": "https://github.com/k1LoW/controler_prefix",
+    "license": "MIT",
+    "authors": [
+        {
+                "name": "Ken'ichiro Oyama",
+                "homepage": "https://github.com/k1LoW",
+                "role": "Author"
+            }
+    ],
+    "require": {
+        "composer/installers": "*"
+    }
+}
