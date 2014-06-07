@@ -14,5 +14,8 @@
     ],
     "require": {
         "composer/installers": "*"
-    }
+    },
+    "require-dev": {
+		"phpunit/phpunit": "3.7.*"
+	}
 }
